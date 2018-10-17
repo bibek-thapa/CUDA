@@ -18,36 +18,33 @@ __global__ void dot_product (int *a_d, int *b_d, int *c_d, int arraySize)
 
     if (x < arraySize/2)
 	{
-	 a_d[x] = x + 1;
+	 	a_d[x] = x + 1;
 	}
     else 
        {
-	a_d[x] = x -((x - arraySize/2)*2);
+		a_d[x] = x -((x - arraySize/2)*2);
 	
 	}
   
   	
-	b_d[x] = (x % 10) + 1;
+		b_d[x] = (x % 10) + 1;
 
 	
 
 	temp[t] = a_d[x] * b_d[x];
 	__syncthreads();
 
-	if(0 == threadIdx.x)
+	if( threadIdx.x==0)
 	{
 
 	int sum=0;
 	for(int i=0;i<THREADS_PER_BLOCK;i++)
-	{
+		{
 		sum+=temp[i];
 
+		}
+		atomicAdd(c_d,sum);
 	}
-	atomicAdd(c_d,sum);
-	}
-     
-
-
 
 
 }

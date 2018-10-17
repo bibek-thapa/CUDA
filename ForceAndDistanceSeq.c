@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define ARRAY_SIZE 30000000
+#define ARRAY_SIZE 900000000
 
 int dotProduct (int *a, int *b, int *c)
 {
@@ -37,7 +37,8 @@ int main (int argc, char *argv[])
 	   c[i] = 0;
    }
 
-
+//   for (i=0; i < ARRAY_SIZE; i++)
+//      c[i] = a[i] + b[i];
 	clock_t start, stop;
    start = clock();
    dotProduct (a, b, c);
